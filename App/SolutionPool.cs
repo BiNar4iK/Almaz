@@ -12,8 +12,8 @@ namespace App
         public event Action solutionsStartEvent;
         public event Action solutionsFinishEvent;
 
-        List<Solution> solutions = new List<Solution>();
-        public List<Solution> activeSolutions = new List<Solution>();
+        List<ISolution> solutions = new List<ISolution>();
+        public List<ISolution> activeSolutions = new List<ISolution>();
 
         System.Windows.Forms.Timer timer;
 
@@ -24,7 +24,7 @@ namespace App
             this.timer = timer;
         }
 
-        public Solution Add(Solution solution)
+        public ISolution Add(ISolution solution)
         {
             solution.isStartEvent += solutionStartHandler;
             solution.isFinishEvent += solutionFinishHandler;
@@ -32,14 +32,14 @@ namespace App
             return solution;
         }
 
-        public void Remove(Solution solution)
+        public void Remove(ISolution solution)
         {
             solution.isStartEvent -= solutionStartHandler;
             solution.isFinishEvent -= solutionFinishHandler;
             solutions.Remove(solution);
         }
 
-        private void solutionStartHandler(Solution solution)
+        private void solutionStartHandler(ISolution solution)
         {
             if (ActiveCount == 0)
             {
@@ -50,7 +50,7 @@ namespace App
             activeSolutions.Add(solution);
         }
 
-        private void solutionFinishHandler(Solution solution)
+        private void solutionFinishHandler(ISolution solution)
         {
             activeSolutions.Remove(solution);
 
@@ -58,19 +58,48 @@ namespace App
             {
                 solutionsFinishEvent?.Invoke();
                 timer.Stop();
+                Clear();
             }
-
-            solution.CurveDraw();
 
             solution.zedGraphControl.AxisChange();
             solution.zedGraphControl.Invalidate();
 
-            solution.Dispose();
+            //solution.Dispose();
+        }
+
+        public ISolution this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= Count)
+                    throw new IndexOutOfRangeException("Индекс вне диапазона.");
+                return solutions[index];
+            }
+            set
+            {
+                if (index < 0 || index >= Count)
+                    throw new IndexOutOfRangeException("Индекс вне диапазона.");
+                solutions[index] = value;
+            }
         }
 
         public void Dispose()
         {
-            foreach (Solution pool in solutions) pool.Dispose();
+            foreach (ISolution pool in solutions) pool.Dispose();
+        }
+
+        public void Clear()
+        {
+            Dispose();
+
+            foreach (ISolution solution in solutions)
+            {
+                solution.isStartEvent -= solutionStartHandler;
+                solution.isFinishEvent -= solutionFinishHandler;
+            }
+            solutions.Clear();
+
+            activeSolutions.Clear();
         }
     }
 }

@@ -67,6 +67,12 @@
             this.labelFinalTime0 = new System.Windows.Forms.Label();
             this.labelCurrentN0 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.textBoxGraphStep2 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBoxGraphStep1 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -101,7 +107,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(576, 0);
+            this.button1.Location = new System.Drawing.Point(575, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(340, 102);
             this.button1.TabIndex = 2;
@@ -246,7 +252,7 @@
             this.textBoxN.Name = "textBoxN";
             this.textBoxN.Size = new System.Drawing.Size(244, 38);
             this.textBoxN.TabIndex = 19;
-            this.textBoxN.Text = "10000000";
+            this.textBoxN.Text = "1000000";
             // 
             // panel1
             // 
@@ -288,6 +294,12 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.textBoxGraphStep1);
+            this.panel2.Controls.Add(this.label16);
+            this.panel2.Controls.Add(this.checkBox2);
+            this.panel2.Controls.Add(this.textBoxGraphStep2);
+            this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Location = new System.Drawing.Point(418, 963);
             this.panel2.Name = "panel2";
@@ -489,6 +501,68 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "Аналитическое";
             // 
+            // textBoxGraphStep2
+            // 
+            this.textBoxGraphStep2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxGraphStep2.Location = new System.Drawing.Point(392, 37);
+            this.textBoxGraphStep2.Name = "textBoxGraphStep2";
+            this.textBoxGraphStep2.Size = new System.Drawing.Size(147, 38);
+            this.textBoxGraphStep2.TabIndex = 21;
+            this.textBoxGraphStep2.Text = "200";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(189, 35);
+            this.label15.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(184, 38);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "GraphStep:";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox2.Location = new System.Drawing.Point(26, 37);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(157, 36);
+            this.checkBox2.TabIndex = 23;
+            this.checkBox2.Text = "Маркеры";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(948, 37);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(157, 36);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Маркеры";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBoxGraphStep1
+            // 
+            this.textBoxGraphStep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxGraphStep1.Location = new System.Drawing.Point(1315, 38);
+            this.textBoxGraphStep1.Name = "textBoxGraphStep1";
+            this.textBoxGraphStep1.Size = new System.Drawing.Size(147, 38);
+            this.textBoxGraphStep1.TabIndex = 24;
+            this.textBoxGraphStep1.Text = "500";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Location = new System.Drawing.Point(1111, 35);
+            this.label16.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(184, 38);
+            this.label16.TabIndex = 25;
+            this.label16.Text = "GraphStep:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -507,6 +581,7 @@
             this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -555,6 +630,12 @@
         private System.Windows.Forms.Label labelFinalTime0;
         private System.Windows.Forms.Label labelCurrentN0;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBoxGraphStep2;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox textBoxGraphStep1;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 

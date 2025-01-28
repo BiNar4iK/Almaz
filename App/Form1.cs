@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -23,7 +24,7 @@ namespace App
             zedGraphControl2.GraphPane.XAxis.Title.Text = "Время";
             zedGraphControl2.GraphPane.YAxis.Title.Text = "Величина ошибки";
 
-            timer1.Interval = 5;
+            timer1.Interval = 16;
             solutionPool = new SolutionPool(timer1);
         }
 
@@ -36,10 +37,23 @@ namespace App
 
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
+
+            zedGraphControl2.AxisChange();
+            zedGraphControl2.Invalidate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            solutionPool.Clear();
+            zedGraphControl1.GraphPane.CurveList.Clear();
+            zedGraphControl2.GraphPane.CurveList.Clear();
+
+            int GraphStep1 = int.Parse(textBoxGraphStep1.Text);
+            int GraphStep2 = int.Parse(textBoxGraphStep2.Text);
+
+            bool marker1 = checkBox1.Checked;
+            bool marker2 = checkBox2.Checked;
+
             double x0 = double.Parse(textBox_X0.Text, CultureInfo.InvariantCulture);
             double y0 = double.Parse(textBox_Y0.Text, CultureInfo.InvariantCulture);
             double omega = double.Parse(textBoxOmega.Text, CultureInfo.InvariantCulture);
@@ -47,9 +61,33 @@ namespace App
             double dt = double.Parse(textBoxdT.Text, CultureInfo.InvariantCulture);
             int N = int.Parse(textBoxN.Text, CultureInfo.InvariantCulture);
 
-            solutionPool.Add(new Solution(zedGraphControl1, labelCurrentN0, labelFinalTime0, 500)).Solve(x0, y0, omega, gamma, dt, N, SolveMethod.Analytical);
-            solutionPool.Add(new Solution(zedGraphControl1, labelCurrentN1, labelFinalTime1, 500)).Solve(x0, y0, omega, gamma, dt, N, SolveMethod.Euler);
-            solutionPool.Add(new Solution(zedGraphControl1, labelCurrentN2, labelFinalTime2, 500)).Solve(x0, y0, omega, gamma, dt, N, SolveMethod.RungeKutta);
+            Solution solution1 = new Solution(zedGraphControl1, labelCurrentN0, labelFinalTime0, "Аналитическое", Color.Green, marker1);
+            solution1.Solve(x0, y0, omega, gamma, dt, N, SolveMethod.Analytical);
+            solution1.graphStep = GraphStep1;
+            solutionPool.Add(solution1);
+
+            Solution solution2 = new Solution(zedGraphControl1, labelCurrentN1, labelFinalTime1, "Эйлер", Color.Blue, marker1);
+            solution2.Solve(x0, y0, omega, gamma, dt, N, SolveMethod.Euler);
+            solution2.graphStep = GraphStep1;
+            solutionPool.Add(solution2);
+
+            Solution solution3 = new Solution(zedGraphControl1, labelCurrentN2, labelFinalTime2, "Рунге-Кутта", Color.Red, marker1);
+            solution3.Solve(x0, y0, omega, gamma, dt, N, SolveMethod.RungeKutta);
+            solution3.graphStep = GraphStep1;
+            solutionPool.Add(solution3);
+
+            DifferentSolution differentSolution1 = new DifferentSolution(solution1, solution2, zedGraphControl2, "Эйлер", Color.Blue, marker2);
+            differentSolution1.graphStep = GraphStep2;
+            solutionPool.Add(differentSolution1);
+
+            DifferentSolution differentSolution2 = new DifferentSolution(solution1, solution3, zedGraphControl2, "Рунге-Кутта", Color.Red, marker2);
+            differentSolution2.graphStep = GraphStep2;
+            solutionPool.Add(differentSolution2);
+
+            for (int i = 0; i < solutionPool.Count; i++)
+            {
+                solutionPool[i].Start();
+            }
         }
     }
 }
