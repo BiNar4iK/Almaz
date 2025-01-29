@@ -32,7 +32,7 @@ namespace App
         {
             for (int i = 0; i < solutionPool.ActiveCount; i++)
             {
-                solutionPool.activeSolutions[i].CurveDraw();
+                //solutionPool.activeSolutions[i].CurveDraw();
             }
 
             zedGraphControl1.AxisChange();
@@ -76,13 +76,13 @@ namespace App
             solution3.graphStep = GraphStep1;
             solutionPool.Add(solution3);
 
-            DifferentSolution differentSolution1 = new DifferentSolution(solution1, solution2, zedGraphControl2, "Эйлер", Color.Blue, marker2);
-            differentSolution1.graphStep = GraphStep2;
-            solutionPool.Add(differentSolution1);
+            //DifferentSolution differentSolution1 = new DifferentSolution(solution1, solution2, zedGraphControl2, "Эйлер", Color.Blue, marker2);
+            //differentSolution1.graphStep = GraphStep2;
+            //solutionPool.Add(differentSolution1);
 
-            DifferentSolution differentSolution2 = new DifferentSolution(solution1, solution3, zedGraphControl2, "Рунге-Кутта", Color.Red, marker2);
-            differentSolution2.graphStep = GraphStep2;
-            solutionPool.Add(differentSolution2);
+            //DifferentSolution differentSolution2 = new DifferentSolution(solution1, solution3, zedGraphControl2, "Рунге-Кутта", Color.Red, marker2);
+            //differentSolution2.graphStep = GraphStep2;
+            //solutionPool.Add(differentSolution2);
 
             for (int i = 0; i < solutionPool.Count; i++)
             {

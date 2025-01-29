@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
-using System.Windows.Forms;
 using ZedGraph;
 
 namespace App
@@ -23,7 +22,7 @@ namespace App
         int currentNmin = 0;
         int currentNmax = 0;
 
-        private int _currentN;
+        private int _currentN = 0;
 
         public int currentN { get { return _currentN; } private set { _currentN = value; } }
         public int N { get; private set; } = 0;
@@ -41,7 +40,7 @@ namespace App
         System.Windows.Forms.Label labelTime;
         System.Windows.Forms.Label labelCurrentN;
 
-        Thread thread;
+        Thread thread = null;
 
         string title;
         Color color;
@@ -77,8 +76,7 @@ namespace App
                     thread = new Thread(() =>
                     {
                         time = Logic.solveAnalytical(x0, y0, omega, gamma, dt, N, ref X.array, ref Y.array, ref _currentN);
-                        this.labelTime.Text = Convert.ToString(time);
-                        thread = null;
+                        //this.labelTime.Text = Convert.ToString(time);
                         Active = false;
                         CurveDraw();
                         isFinishEvent.Invoke(this);
@@ -91,8 +89,7 @@ namespace App
                     thread = new Thread(() =>
                     {
                         time = Logic.solveEuler(x0, y0, omega, gamma, dt, N, ref X.array, ref Y.array, ref _currentN);
-                        this.labelTime.Text = Convert.ToString(time);
-                        thread = null;
+                        //this.labelTime.Text = Convert.ToString(time);
                         Active = false;
                         CurveDraw();
                         isFinishEvent.Invoke(this);
@@ -105,8 +102,7 @@ namespace App
                     thread = new Thread(() =>
                     {
                         time = Logic.solveRungeKutta(x0, y0, omega, gamma, dt, N, ref X.array, ref Y.array, ref _currentN);
-                        this.labelTime.Text = Convert.ToString(time);
-                        thread = null;
+                        //this.labelTime.Text = Convert.ToString(time);
                         Active = false;
                         CurveDraw();
                         isFinishEvent.Invoke(this);
@@ -136,7 +132,13 @@ namespace App
 
         public void Dispose()
         {
-            thread?.Abort();
+            if (thread != null)
+            {
+                while (thread.IsAlive)
+                {
+                    thread.Abort();
+                }
+            }
 
             for (int i = 0; i < attachedSolutions.Count; i++)
             {

@@ -10,12 +10,15 @@ namespace App
     {
         int Capacity { get; }
         int Size { get; }
+
         public double* array;
+
+        public bool Alive;
 
         public Array(int Capacity)
         {
             this.Capacity = Capacity;
-            Logic.createArray(out array, Capacity);
+            Alive = Logic.createArray(out array, Capacity);
         }
 
         // Индексатор для доступа к элементам массива
@@ -23,13 +26,13 @@ namespace App
         {
             get
             {
-                if (index < 0 || index >= Capacity)
+                if (index < 0 || index >= Capacity || !Alive)
                     throw new IndexOutOfRangeException("Индекс вне диапазона.");
                 return array[index];
             }
             set
             {
-                if (index < 0 || index >= Capacity)
+                if (index < 0 || index >= Capacity || !Alive)
                     throw new IndexOutOfRangeException("Индекс вне диапазона.");
                 array[index] = value;
             }
@@ -55,7 +58,7 @@ namespace App
                 }
 
                 // Освобождение неуправляемых ресурсов (если есть)
-                Logic.cleanArray(ref array);
+                Alive = !Logic.cleanArray(ref array);
 
                 disposed = true;
             }

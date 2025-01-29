@@ -1,18 +1,18 @@
 #include "pch.h"
 #include "framework.h"
 
-void createArray(double*& pointer, int size)
+bool createArray(double*& pointer, int size)
 {
     pointer = new double[size] {};
-    /*for (int i = 0; i < size; i++)
-    {
-        pointer[i] = i;
-    }*/
+
+    return true;
 }
 
-void cleanArray(double*& pointer)
+bool cleanArray(double*& pointer)
 {
 	delete[] pointer;
+
+    return true;
 }
 
 double solveRungeKutta(double x0, double y0, double omega, double gamma, double dt, int N, double*& x_array, double*& y_array, int& currentN)
