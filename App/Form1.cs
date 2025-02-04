@@ -20,12 +20,13 @@ namespace App
             zedGraphControl1.GraphPane.XAxis.Title.Text = "x";
             zedGraphControl1.GraphPane.YAxis.Title.Text = "ẋ";
 
-            zedGraphControl1.GraphPane.Title.Text = "График ошибки";
+            zedGraphControl2.GraphPane.Title.Text = "График ошибки";
             zedGraphControl2.GraphPane.XAxis.Title.Text = "Время";
             zedGraphControl2.GraphPane.YAxis.Title.Text = "Величина ошибки";
 
             timer1.Interval = 50;
             solutionPool = new SolutionPool(timer1);
+            solutionPool.solutionsFinishEvent += SolutionsFinishHandler;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -125,6 +126,10 @@ namespace App
 
             zedGraphControl2.AxisChange();
             zedGraphControl2.Invalidate();
+        }
+
+        private void SolutionsFinishHandler()
+        {
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ZedGraph;
 
 namespace App
 {
@@ -57,9 +58,6 @@ namespace App
 
                 Clear();
             }
-
-            solution.zedGraphControl.AxisChange();
-            solution.zedGraphControl.Invalidate();
         }
 
         public ISolution this[int index]

@@ -90,6 +90,9 @@ namespace App
                     isFinishEvent.Invoke(this);
                 }
 
+                zedGraphControl.AxisChange();
+                zedGraphControl.Invalidate();
+
                 isDrawing = false;
             }
         }
@@ -132,6 +135,15 @@ namespace App
 
         public void Start()
         {
+            foreach (var curve in zedGraphControl.GraphPane.CurveList)
+            {
+                if (curve.Label.Text == title)
+                {
+                    title = null;
+                    break;
+                }
+            }
+
             zedGraphControl.GraphPane.AddCurve(title, null, null, color, symbolType);
             id = zedGraphControl.GraphPane.CurveList.Count - 1;
 

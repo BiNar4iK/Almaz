@@ -39,6 +39,7 @@ namespace App
         public ZedGraphControl zedGraphControl { get; }
 
         private bool isDrawing = false;
+        private bool isStarted = false;
 
         System.Windows.Forms.Label labelTime;
         System.Windows.Forms.Label labelCurrentN;
@@ -150,6 +151,9 @@ namespace App
                     isFinishEvent.Invoke(this);
                 }
 
+                zedGraphControl.AxisChange();
+                zedGraphControl.Invalidate();
+
                 isDrawing = false;
             }
 
@@ -183,8 +187,9 @@ namespace App
 
         public void Start()
         {
-            if (thread is null) return;
+            if (isStarted) return;
 
+            isStarted = true;
             thread.Start();
 
             ThreadActive = true;
