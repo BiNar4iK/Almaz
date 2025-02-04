@@ -49,6 +49,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBoxGraphStep1 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.textBoxGraphStep2 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -67,12 +73,12 @@
             this.labelFinalTime0 = new System.Windows.Forms.Label();
             this.labelCurrentN0 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBoxGraphStep2 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBoxGraphStep1 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkBoxAnaliticPh = new System.Windows.Forms.CheckBox();
+            this.checkBoxEulerErr = new System.Windows.Forms.CheckBox();
+            this.checkBoxEulerFh = new System.Windows.Forms.CheckBox();
+            this.checkBoxRuKuErr = new System.Windows.Forms.CheckBox();
+            this.checkBoxRuKuPh = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -86,7 +92,7 @@
             this.zedGraphControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.zedGraphControl1.Location = new System.Drawing.Point(749, 4);
+            this.zedGraphControl1.Location = new System.Drawing.Point(853, 4);
             this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
@@ -96,7 +102,7 @@
             this.zedGraphControl1.ScrollMinX = 0D;
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(737, 937);
+            this.zedGraphControl1.Size = new System.Drawing.Size(842, 937);
             this.zedGraphControl1.TabIndex = 1;
             this.zedGraphControl1.UseExtendedPrintDialog = true;
             // 
@@ -106,10 +112,11 @@
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(575, 0);
+            this.button1.Location = new System.Drawing.Point(768, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(340, 102);
+            this.button1.Size = new System.Drawing.Size(160, 102);
             this.button1.TabIndex = 2;
             this.button1.Text = "Solve";
             this.button1.UseVisualStyleBackColor = true;
@@ -130,7 +137,7 @@
             this.zedGraphControl2.ScrollMinX = 0D;
             this.zedGraphControl2.ScrollMinY = 0D;
             this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(737, 937);
+            this.zedGraphControl2.Size = new System.Drawing.Size(841, 937);
             this.zedGraphControl2.TabIndex = 6;
             this.zedGraphControl2.UseExtendedPrintDialog = true;
             // 
@@ -287,13 +294,14 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1490, 945);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1699, 945);
             this.tableLayoutPanel1.TabIndex = 22;
             // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.textBoxGraphStep1);
             this.panel2.Controls.Add(this.label16);
@@ -303,11 +311,81 @@
             this.panel2.Controls.Add(this.button1);
             this.panel2.Location = new System.Drawing.Point(418, 963);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1490, 105);
+            this.panel2.Size = new System.Drawing.Size(1699, 105);
             this.panel2.TabIndex = 23;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(1164, 35);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(157, 36);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Маркеры";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBoxGraphStep1
+            // 
+            this.textBoxGraphStep1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxGraphStep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxGraphStep1.Location = new System.Drawing.Point(1531, 36);
+            this.textBoxGraphStep1.Name = "textBoxGraphStep1";
+            this.textBoxGraphStep1.Size = new System.Drawing.Size(147, 38);
+            this.textBoxGraphStep1.TabIndex = 24;
+            this.textBoxGraphStep1.Text = "500";
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Location = new System.Drawing.Point(1327, 33);
+            this.label16.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(184, 38);
+            this.label16.TabIndex = 25;
+            this.label16.Text = "GraphStep:";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox2.Location = new System.Drawing.Point(26, 37);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(157, 36);
+            this.checkBox2.TabIndex = 23;
+            this.checkBox2.Text = "Маркеры";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // textBoxGraphStep2
+            // 
+            this.textBoxGraphStep2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxGraphStep2.Location = new System.Drawing.Point(392, 37);
+            this.textBoxGraphStep2.Name = "textBoxGraphStep2";
+            this.textBoxGraphStep2.Size = new System.Drawing.Size(147, 38);
+            this.textBoxGraphStep2.TabIndex = 21;
+            this.textBoxGraphStep2.Text = "200";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(189, 35);
+            this.label15.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(184, 38);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "GraphStep:";
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.checkBoxEulerErr);
+            this.panel3.Controls.Add(this.checkBoxEulerFh);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.labelFinalTime1);
@@ -373,6 +451,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.checkBoxRuKuErr);
+            this.panel4.Controls.Add(this.checkBoxRuKuPh);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Controls.Add(this.label11);
             this.panel4.Controls.Add(this.labelFinalTime2);
@@ -380,7 +460,7 @@
             this.panel4.Controls.Add(this.label10);
             this.panel4.Location = new System.Drawing.Point(19, 806);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(393, 230);
+            this.panel4.Size = new System.Drawing.Size(393, 262);
             this.panel4.TabIndex = 25;
             // 
             // label12
@@ -438,6 +518,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.checkBoxAnaliticPh);
             this.panel5.Controls.Add(this.label13);
             this.panel5.Controls.Add(this.label14);
             this.panel5.Controls.Add(this.labelFinalTime0);
@@ -501,73 +582,88 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "Аналитическое";
             // 
-            // textBoxGraphStep2
+            // button2
             // 
-            this.textBoxGraphStep2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxGraphStep2.Location = new System.Drawing.Point(392, 37);
-            this.textBoxGraphStep2.Name = "textBoxGraphStep2";
-            this.textBoxGraphStep2.Size = new System.Drawing.Size(147, 38);
-            this.textBoxGraphStep2.TabIndex = 21;
-            this.textBoxGraphStep2.Text = "200";
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(602, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(160, 102);
+            this.button2.TabIndex = 27;
+            this.button2.Text = "Clear";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // label15
+            // checkBoxAnaliticPh
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(189, 35);
-            this.label15.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(184, 38);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "GraphStep:";
+            this.checkBoxAnaliticPh.AutoSize = true;
+            this.checkBoxAnaliticPh.Checked = true;
+            this.checkBoxAnaliticPh.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxAnaliticPh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxAnaliticPh.Location = new System.Drawing.Point(12, 223);
+            this.checkBoxAnaliticPh.Name = "checkBoxAnaliticPh";
+            this.checkBoxAnaliticPh.Size = new System.Drawing.Size(60, 24);
+            this.checkBoxAnaliticPh.TabIndex = 5;
+            this.checkBoxAnaliticPh.Text = "ФП";
+            this.checkBoxAnaliticPh.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // checkBoxEulerErr
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox2.Location = new System.Drawing.Point(26, 37);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(157, 36);
-            this.checkBox2.TabIndex = 23;
-            this.checkBox2.Text = "Маркеры";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBoxEulerErr.AutoSize = true;
+            this.checkBoxEulerErr.Checked = true;
+            this.checkBoxEulerErr.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxEulerErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxEulerErr.Location = new System.Drawing.Point(114, 223);
+            this.checkBoxEulerErr.Name = "checkBoxEulerErr";
+            this.checkBoxEulerErr.Size = new System.Drawing.Size(145, 24);
+            this.checkBoxEulerErr.TabIndex = 8;
+            this.checkBoxEulerErr.Text = "Погрешность";
+            this.checkBoxEulerErr.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // checkBoxEulerFh
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox1.Location = new System.Drawing.Point(948, 37);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(157, 36);
-            this.checkBox1.TabIndex = 26;
-            this.checkBox1.Text = "Маркеры";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxEulerFh.AutoSize = true;
+            this.checkBoxEulerFh.Checked = true;
+            this.checkBoxEulerFh.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxEulerFh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxEulerFh.Location = new System.Drawing.Point(12, 223);
+            this.checkBoxEulerFh.Name = "checkBoxEulerFh";
+            this.checkBoxEulerFh.Size = new System.Drawing.Size(60, 24);
+            this.checkBoxEulerFh.TabIndex = 7;
+            this.checkBoxEulerFh.Text = "ФП";
+            this.checkBoxEulerFh.UseVisualStyleBackColor = true;
             // 
-            // textBoxGraphStep1
+            // checkBoxRuKuErr
             // 
-            this.textBoxGraphStep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxGraphStep1.Location = new System.Drawing.Point(1315, 38);
-            this.textBoxGraphStep1.Name = "textBoxGraphStep1";
-            this.textBoxGraphStep1.Size = new System.Drawing.Size(147, 38);
-            this.textBoxGraphStep1.TabIndex = 24;
-            this.textBoxGraphStep1.Text = "500";
+            this.checkBoxRuKuErr.AutoSize = true;
+            this.checkBoxRuKuErr.Checked = true;
+            this.checkBoxRuKuErr.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRuKuErr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxRuKuErr.Location = new System.Drawing.Point(114, 224);
+            this.checkBoxRuKuErr.Name = "checkBoxRuKuErr";
+            this.checkBoxRuKuErr.Size = new System.Drawing.Size(145, 24);
+            this.checkBoxRuKuErr.TabIndex = 9;
+            this.checkBoxRuKuErr.Text = "Погрешность";
+            this.checkBoxRuKuErr.UseVisualStyleBackColor = true;
             // 
-            // label16
+            // checkBoxRuKuPh
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(1111, 35);
-            this.label16.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(184, 38);
-            this.label16.TabIndex = 25;
-            this.label16.Text = "GraphStep:";
+            this.checkBoxRuKuPh.AutoSize = true;
+            this.checkBoxRuKuPh.Checked = true;
+            this.checkBoxRuKuPh.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRuKuPh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxRuKuPh.Location = new System.Drawing.Point(12, 224);
+            this.checkBoxRuKuPh.Name = "checkBoxRuKuPh";
+            this.checkBoxRuKuPh.Size = new System.Drawing.Size(60, 24);
+            this.checkBoxRuKuPh.TabIndex = 8;
+            this.checkBoxRuKuPh.Text = "ФП";
+            this.checkBoxRuKuPh.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.ClientSize = new System.Drawing.Size(2129, 1080);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -636,6 +732,12 @@
         private System.Windows.Forms.TextBox textBoxGraphStep1;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBoxAnaliticPh;
+        private System.Windows.Forms.CheckBox checkBoxEulerErr;
+        private System.Windows.Forms.CheckBox checkBoxEulerFh;
+        private System.Windows.Forms.CheckBox checkBoxRuKuErr;
+        private System.Windows.Forms.CheckBox checkBoxRuKuPh;
     }
 }
 

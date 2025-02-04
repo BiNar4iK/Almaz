@@ -43,6 +43,7 @@ namespace App
         // Метод Dispose для освобождения ресурсов
         public void Dispose()
         {
+            Alive = false;
             Dispose(true);
             GC.SuppressFinalize(this); // Предотвращает вызов деструктора
         }

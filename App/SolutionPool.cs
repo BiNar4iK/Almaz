@@ -54,6 +54,7 @@ namespace App
             {
                 solutionsFinishEvent?.Invoke();
                 timer.Stop();
+
                 Clear();
             }
 
@@ -79,7 +80,10 @@ namespace App
 
         public void Dispose()
         {
-            foreach (ISolution pool in solutions) pool.Dispose();
+            foreach (ISolution pool in solutions)
+            {
+                pool.Dispose();
+            }
         }
 
         public void Clear()

@@ -11,7 +11,7 @@ namespace App
 
         public event Action<ISolution> isStartEvent;
         public event Action<ISolution> isFinishEvent;
-        public bool Active { get; private set; } = true;
+        public bool ThreadActive { get; private set; } = true;
 
         ISolution sourceSolution;
         ISolution targetSolution;
@@ -25,6 +25,8 @@ namespace App
         public int currentN { get; private set; } = 0;
         public int N { get; private set; } = 0;
 
+        private bool isDrawing = false;
+
         public int graphStep = 200;
         string title;
         Color color;
@@ -33,7 +35,7 @@ namespace App
         public DifferentSolution(ISolution sourceSolution, ISolution targetSolution, ZedGraphControl zedGraphControl, string title, Color color, bool markers = false)
         {
             sourceSolution.AttachSolution(this);
-            sourceSolution.AttachSolution(this);
+            targetSolution.AttachSolution(this);
 
             this.sourceSolution = sourceSolution;
             this.targetSolution = targetSolution;
@@ -62,26 +64,33 @@ namespace App
 
         public void CurveDraw()
         {
-            if (sourceSolution.currentN > targetSolution.currentN)
+            if (!isDrawing)
             {
-                currentNmax = targetSolution.currentN;
-            }
-            else
-            {
-                currentNmax = sourceSolution.currentN;
-            }
+                isDrawing = true;
 
-            for (int i = currentNmin; i < currentNmax; i += graphStep)
-            {
-                zedGraphControl.GraphPane.CurveList[id].AddPoint(i, Norma(i));
-            }
+                if (sourceSolution.currentN > targetSolution.currentN)
+                {
+                    currentNmax = targetSolution.currentN;
+                }
+                else
+                {
+                    currentNmax = sourceSolution.currentN;
+                }
 
-            currentNmin = currentNmax;
+                for (int i = currentNmin; i < currentNmax; i += graphStep)
+                {
+                    zedGraphControl.GraphPane.CurveList[id].AddPoint(i, Norma(i));
+                }
 
-            if (currentNmax == N - 1)
-            {
-                Active = false;
-                isFinishEvent?.Invoke(this);
+                currentNmin = currentNmax;
+
+                if (currentNmax == N)
+                {
+                    ThreadActive = false;
+                    isFinishEvent.Invoke(this);
+                }
+
+                isDrawing = false;
             }
         }
 
@@ -124,7 +133,6 @@ namespace App
         public void Start()
         {
             zedGraphControl.GraphPane.AddCurve(title, null, null, color, symbolType);
-            //zedGraphControl.GraphPane.AddCurve(title, new[] {0d}, new[] {0d}, color);
             id = zedGraphControl.GraphPane.CurveList.Count - 1;
 
             isStartEvent?.Invoke(this);

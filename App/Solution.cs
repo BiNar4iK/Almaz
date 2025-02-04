@@ -23,6 +23,7 @@ namespace App
         int currentNmax = 0;
 
         private int _currentN = 0;
+        private int _lastN = 0;
 
         public int currentN { get { return _currentN; } private set { _currentN = value; } }
         public int N { get; private set; } = 0;
@@ -30,12 +31,14 @@ namespace App
         double time = 0;
         public int graphStep = 500;
 
-        public bool Active { get; private set; } = false;
+        public bool ThreadActive { get; private set; } = false;
         public event Action<ISolution> isStartEvent;
         public event Action<ISolution> isFinishEvent;
 
         int id;
         public ZedGraphControl zedGraphControl { get; }
+
+        private bool isDrawing = false;
 
         System.Windows.Forms.Label labelTime;
         System.Windows.Forms.Label labelCurrentN;
@@ -66,6 +69,12 @@ namespace App
 
         public void Solve(double x0, double y0, double omega, double gamma, double dt, int N, SolveMethod solveMethod)
         {
+            if (N == 0)
+            {
+                ThreadFinish();
+                return;
+            }
+
             this.N = N;
             X = new Array(N);
             Y = new Array(N);
@@ -76,76 +85,85 @@ namespace App
                     thread = new Thread(() =>
                     {
                         time = Logic.solveAnalytical(x0, y0, omega, gamma, dt, N, ref X.array, ref Y.array, ref _currentN);
-                        //this.labelTime.Text = Convert.ToString(time);
-                        Active = false;
-                        CurveDraw();
-                        isFinishEvent.Invoke(this);
+                        ThreadFinish();
+                        ThreadActive = false;
                     });
-
-                    zedGraphControl.GraphPane.AddCurve(title, null, null, color, symbolType);
-
                     break;
+
                 case SolveMethod.Euler:
                     thread = new Thread(() =>
                     {
                         time = Logic.solveEuler(x0, y0, omega, gamma, dt, N, ref X.array, ref Y.array, ref _currentN);
-                        //this.labelTime.Text = Convert.ToString(time);
-                        Active = false;
-                        CurveDraw();
-                        isFinishEvent.Invoke(this);
+                        ThreadFinish();
+                        ThreadActive = false;
                     });
-
-                    zedGraphControl.GraphPane.AddCurve(title, null, null, color, symbolType);
-
                     break;
+
                 case SolveMethod.RungeKutta:
                     thread = new Thread(() =>
                     {
                         time = Logic.solveRungeKutta(x0, y0, omega, gamma, dt, N, ref X.array, ref Y.array, ref _currentN);
-                        //this.labelTime.Text = Convert.ToString(time);
-                        Active = false;
-                        CurveDraw();
-                        isFinishEvent.Invoke(this);
+                        ThreadFinish();
+                        ThreadActive = false;
                     });
-
-                    zedGraphControl.GraphPane.AddCurve(title, null, null, color, symbolType);
-
                     break;
             }
+
+            foreach (var curve in zedGraphControl.GraphPane.CurveList)
+            {
+                if (curve.Label.Text == title)
+                {
+                    title = null;
+                    break;
+                }
+            }
+
+            zedGraphControl.GraphPane.AddCurve(title, null, null, color, symbolType);
 
             id = zedGraphControl.GraphPane.CurveList.Count - 1;
         }
 
         public void CurveDraw()
         {
-            currentNmax = currentN;
-
-            for (int i = currentNmin; i < currentNmax; i += graphStep)
+            if (!isDrawing)
             {
-                zedGraphControl.GraphPane.CurveList[id].AddPoint(X[i], Y[i]);
+                isDrawing = true;
+
+                currentNmax = currentN;
+
+                for (int i = currentNmin; i < currentNmax; i += graphStep)
+                {
+                    zedGraphControl.GraphPane.CurveList[id].AddPoint(X[i], Y[i]);
+                    _lastN = i;
+                }
+
+                currentNmin = currentNmax;
+
+                if (currentNmax == N)
+                {
+                    if (_lastN != N - 1)
+                    {
+                        _lastN = N - 1;
+                        zedGraphControl.GraphPane.CurveList[id].AddPoint(X[_lastN], Y[_lastN]);
+                    }
+
+                    isFinishEvent.Invoke(this);
+                }
+
+                isDrawing = false;
             }
 
-            currentNmin = currentNmax;
-
-            labelCurrentN.Text = Convert.ToString(currentN+1);
+            labelCurrentN.Text = Convert.ToString(currentN);
         }
 
         public void Dispose()
         {
-            if (thread != null)
-            {
-                while (thread.IsAlive)
-                {
-                    thread.Abort();
-                }
-            }
-
             for (int i = 0; i < attachedSolutions.Count; i++)
             {
-                if (attachedSolutions[i].Active) return;
+                if (attachedSolutions[i].ThreadActive) return;
             }
 
-            X.Dispose(); Y.Dispose();
+            X?.Dispose(); Y?.Dispose();
         }
 
         public void AttachSolution(ISolution solution)
@@ -165,10 +183,17 @@ namespace App
 
         public void Start()
         {
+            if (thread is null) return;
+
             thread.Start();
 
-            Active = true;
+            ThreadActive = true;
             isStartEvent.Invoke(this);
+        }
+
+        public void ThreadFinish()
+        {
+            labelTime.Text = Convert.ToString(time);
         }
     }
 }

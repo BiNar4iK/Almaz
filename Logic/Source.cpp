@@ -21,8 +21,12 @@ double solveRungeKutta(double x0, double y0, double omega, double gamma, double 
     double k12, k22, k32, k42;
 
     double omega2 = omega * omega;
+    double minus2gamma = -2 * gamma;
+    double halfDt = dt / 2;
+    double sixDt = dt / 6;
 
     x_array[0] = x0; y_array[0] = y0;
+    currentN = 1;
 
     double x1 = x0; double y1 = y0;
     double x2, y2;
@@ -32,24 +36,25 @@ double solveRungeKutta(double x0, double y0, double omega, double gamma, double 
     for (int i = 1; i < N; i++)
     {
         k11 = y1;
-        k21 = y1 + dt / 2 * k11;
-        k31 = y1 + dt / 2 * k21;
-        k41 = y1 + dt * k31;
+        k12 = minus2gamma * y1 - omega2 * x1;
 
-        x2 = x1 + dt / 6 * (k11 + 2 * k21 + 2 * k31 + k41);
+        k21 = y1 + halfDt * k12;
+        k22 = minus2gamma * (y1 + halfDt * k12) - omega2 * (x1 + halfDt * k11);
 
-        k12 = -2 * gamma * y1 - omega2 * x1;
-        k22 = -2 * gamma * (y1 + dt / 2 * k12) - omega2 * (x1 + dt / 2 * k12);
-        k32 = -2 * gamma * (y1 + dt / 2 * k22) - omega2 * (x1 + dt / 2 * k22);
-        k42 = -2 * gamma * (y1 + dt * k32) - omega2 * (x1 + dt * k32);
+        k31 = y1 + halfDt * k22;
+        k32 = minus2gamma * (y1 + halfDt * k22) - omega2 * (x1 + halfDt * k21);
 
-        y2 = y1 + dt / 6 * (k12 + 2 * k22 + 2 * k32 + k42);
+        k41 = y1 + dt * k32;
+        k42 = minus2gamma * (y1 + dt * k32) - omega2 * (x1 + dt * k31);
+
+        x2 = x1 + sixDt * (k11 + 2 * k21 + 2 * k31 + k41);
+        y2 = y1 + sixDt * (k12 + 2 * k22 + 2 * k32 + k42);
 
         x_array[i] = x2; y_array[i] = y2;
 
         x1 = x2; y1 = y2;
 
-        currentN = i;
+        currentN = i + 1;
     }
 
     auto end = std::chrono::high_resolution_clock::now();
@@ -68,6 +73,7 @@ double solveAnalytical(double x0, double y0, double omega0, double gamma, double
     double S1, S2, E1;
 
     x_array[0] = x0; y_array[0] = y0;
+    currentN = 1;
 
     auto start = std::chrono::high_resolution_clock::now();
 
@@ -80,7 +86,7 @@ double solveAnalytical(double x0, double y0, double omega0, double gamma, double
         x_array[i] = E1 * (x0 * S2 + C1 * S1);
         y_array[i] = -gamma * x_array[i] + E1 * (C2 * S1 + C3 * S2);
 
-        currentN = i;
+        currentN = i + 1;
     }
 
     auto end = std::chrono::high_resolution_clock::now();
@@ -92,6 +98,7 @@ double solveAnalytical(double x0, double y0, double omega0, double gamma, double
 double solveEuler(double x0, double y0, double omega, double gamma, double dt, int N, double*& x_array, double*& y_array, int& currentN)
 {
     x_array[0] = x0; y_array[0] = y0;
+    currentN = 1;
 
     double omega2 = omega * omega;
 
@@ -109,7 +116,7 @@ double solveEuler(double x0, double y0, double omega, double gamma, double dt, i
 
         x1 = x2; y1 = y2;
 
-        currentN = i;
+        currentN = i + 1;
     }
 
     auto end = std::chrono::high_resolution_clock::now();

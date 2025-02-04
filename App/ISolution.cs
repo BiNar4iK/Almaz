@@ -15,7 +15,7 @@ namespace App
         int currentN {  get; }
         int N { get; }
 
-        bool Active { get; }
+        bool ThreadActive { get; }
         void Start();
         void CurveDraw();
         double GetX(int i);
